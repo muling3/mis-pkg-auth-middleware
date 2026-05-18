@@ -1,6 +1,6 @@
 PACKAGE := @mis/auth-middleware
 
-.PHONY: help install auth build test lint pack clean
+.PHONY: help install auth build test lint pack publish clean
 
 help:                  ## Show this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-16s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -8,8 +8,9 @@ help:                  ## Show this help
 install:               ## Install deps for this package (standalone)
 	npm install
 
-auth:                  ## No-op in PoC (no Azure Artifacts feed)
-	@echo "auth: skipped — PoC uses npm workspaces, not Azure Artifacts"
+auth:                  ## Authenticate npm to the @mis Azure Artifacts feed
+	@test -f .npmrc || { echo "no .npmrc — cp .npmrc.example .npmrc and set <org>/<project>/<feed>"; exit 1; }
+	npx -y vsts-npm-auth -config .npmrc
 
 build:                 ## Compile TS to dist/
 	rm -rf dist && npx tsc -p tsconfig.json
@@ -22,6 +23,9 @@ lint:                  ## Lint (stub)
 
 pack:                  ## Build then npm pack
 	$(MAKE) build && npm pack
+
+publish: auth build    ## Publish this package to the @mis Azure Artifacts feed
+	npm publish
 
 clean:                 ## Remove artefacts
 	rm -rf dist node_modules *.tgz
