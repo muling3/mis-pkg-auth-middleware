@@ -1,7 +1,6 @@
 {
   "name": "@mis/auth-middleware",
   "version": "0.1.0",
-  "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -15,5 +14,8 @@
   "devDependencies": {
     "@types/node": "^22.10.0",
     "typescript": "^5.4.5"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }

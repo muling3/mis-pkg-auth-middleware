@@ -33,7 +33,7 @@ pack:                  ## Build then npm pack
 	$(MAKE) build && npm pack
 
 publish: auth build    ## Publish this package to the @mis Azure Artifacts feed
-	npm publish
+	npm publish --no-workspaces
 
 clean:                 ## Remove artefacts
 	rm -rf dist node_modules *.tgz
