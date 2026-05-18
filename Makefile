@@ -5,8 +5,8 @@ PACKAGE := @mis/auth-middleware
 help:                  ## Show this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-16s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-install:               ## Install (delegates to workspace root)
-	cd $(realpath ..) && npm install
+install:               ## Install deps for this package (standalone)
+	npm install
 
 auth:                  ## No-op in PoC (no Azure Artifacts feed)
 	@echo "auth: skipped — PoC uses npm workspaces, not Azure Artifacts"
