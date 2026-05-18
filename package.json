@@ -4,12 +4,15 @@
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "clean": "rm -rf dist node_modules"
   },
   "devDependencies": {
+    "@types/node": "^22.10.0",
     "typescript": "^5.4.5"
   }
 }
